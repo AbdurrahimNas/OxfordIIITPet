@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Oxford-IIIT Pet Classifier</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head>
+    <body>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Classifier">Oxford-IIIT Pet Classifier</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="ModelClasses">Model Classes</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+
+        <div class="container">
+            <h1><center>Oxford-IIIT Pet Classification</center></h1>
+
+        </div>
+        <div>
+          <p>
+            <strong>How to Use:</strong> Upload an image to the server than click <em>Predict</em> button.
+            You can check the classes from <a href=ModelClasses>Model Classes</a>.
+
+          </p>
+        </div>
+            <table class="table">
+                <tbody>
+                    
+                  <form method="post" enctype="multipart/form-data" class="dropzone">
+                    {%csrf_token%} 
+                    <div class="container">
+                      <tr>
+                        <td colspan="4">{{classifierform.pet_image}}</td>
+                        <td><button type="submit" class="btn btn-success mt-3">Predict</button></td>
+                      </tr>    
+                      <tr>
+                        
+                        {% if prediction %}
+                        <td><p><strong>Prediction: </strong>{{prediction}}</p></td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                      {% if prediction %}
+                        <td><strong>Top Five Prediction: </strong></td>
+                      {% for label in predicted_labels %}
+                        <td>{{label}}</td>
+                      {% endfor %}
+                      {% endif %}
+                      
+                      </tr>
+                      </div>
+                    
+                      </form>  
+
+                      
+                    
+
+                </tbody>
+
+            </table>
+    </body>
+</html>
